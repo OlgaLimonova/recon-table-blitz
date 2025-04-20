@@ -1,9 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { auctionHouses, accountNumbers, statusOptions } from "@/types/reconciliation";
+import { auctionHouses, accountNumbers } from "@/types/reconciliation";
 
 interface ReconciliationFiltersProps {
   auctionHouseFilter: string;
@@ -22,60 +21,52 @@ const ReconciliationFilters = ({
   statusFilter,
   setStatusFilter,
 }: ReconciliationFiltersProps) => {
+  // Modify auctionHouses and accountNumbers to remove "Show all"
+  const filteredAuctionHouses = ["Show all", ...auctionHouses.filter(house => house !== "Show all")];
+  const filteredAccountNumbers = ["Show all", ...accountNumbers.filter(account => account !== "Show all")];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <div>
         <label htmlFor="auctionHouseFilter" className="block text-sm font-medium mb-1">
           Auction House
         </label>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="w-full justify-between h-10">
-              {auctionHouseFilter || "Select auction house"}
-              <ChevronDown className="h-4 w-4 opacity-50" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[var(--trigger-width)] min-w-[200px]">
-            <DropdownMenuItem onClick={() => setAuctionHouseFilter("")}>
-              Show all
-            </DropdownMenuItem>
-            {auctionHouses.map((house) => (
-              <DropdownMenuItem
-                key={house}
-                onClick={() => setAuctionHouseFilter(house)}
-              >
+        <Select
+          value={auctionHouseFilter || "Show all"}
+          onValueChange={setAuctionHouseFilter}
+        >
+          <SelectTrigger className="w-full h-10">
+            <SelectValue placeholder="Select auction house" />
+          </SelectTrigger>
+          <SelectContent>
+            {filteredAuctionHouses.map((house) => (
+              <SelectItem key={house} value={house}>
                 {house}
-              </DropdownMenuItem>
+              </SelectItem>
             ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
         <label htmlFor="accountFilter" className="block text-sm font-medium mb-1">
           Account Number
         </label>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="w-full justify-between h-10">
-              {accountFilter || "Select account"}
-              <ChevronDown className="h-4 w-4 opacity-50" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[var(--trigger-width)] min-w-[200px]">
-            <DropdownMenuItem onClick={() => setAccountFilter("")}>
-              Show all
-            </DropdownMenuItem>
-            {accountNumbers.map((account) => (
-              <DropdownMenuItem
-                key={account}
-                onClick={() => setAccountFilter(account)}
-              >
+        <Select
+          value={accountFilter || "Show all"}
+          onValueChange={setAccountFilter}
+        >
+          <SelectTrigger className="w-full h-10">
+            <SelectValue placeholder="Select account" />
+          </SelectTrigger>
+          <SelectContent>
+            {filteredAccountNumbers.map((account) => (
+              <SelectItem key={account} value={account}>
                 {account}
-              </DropdownMenuItem>
+              </SelectItem>
             ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
@@ -86,15 +77,13 @@ const ReconciliationFilters = ({
           value={statusFilter}
           onValueChange={setStatusFilter}
         >
-          <SelectTrigger id="statusFilter" className="w-full h-10">
+          <SelectTrigger className="w-full h-10">
             <SelectValue placeholder="Select status" />
           </SelectTrigger>
           <SelectContent>
-            {statusOptions.map((status) => (
-              <SelectItem key={status} value={status}>
-                {status}
-              </SelectItem>
-            ))}
+            <SelectItem value="All">Show all</SelectItem>
+            <SelectItem value="Matched">Matched</SelectItem>
+            <SelectItem value="Unmatched">Unmatched</SelectItem>
           </SelectContent>
         </Select>
       </div>
