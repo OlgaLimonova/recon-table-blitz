@@ -35,7 +35,7 @@ const ReconciliationFilters = ({
           value={auctionHouseFilter || "Show all"}
           onValueChange={setAuctionHouseFilter}
         >
-          <SelectTrigger className="w-full h-10">
+          <SelectTrigger className="w-full h-10 hover:border-blue-600 hover:border-2 transition-colors">
             <SelectValue placeholder="Select auction house" />
           </SelectTrigger>
           <SelectContent>
@@ -56,7 +56,7 @@ const ReconciliationFilters = ({
           value={accountFilter || "Show all"}
           onValueChange={setAccountFilter}
         >
-          <SelectTrigger className="w-full h-10">
+          <SelectTrigger className="w-full h-10 hover:border-blue-600 hover:border-2 transition-colors">
             <SelectValue placeholder="Select account" />
           </SelectTrigger>
           <SelectContent>
@@ -77,7 +77,7 @@ const ReconciliationFilters = ({
           value={statusFilter}
           onValueChange={setStatusFilter}
         >
-          <SelectTrigger className="w-full h-10">
+          <SelectTrigger className="w-full h-10 hover:border-blue-600 hover:border-2 transition-colors">
             <SelectValue placeholder="Select status" />
           </SelectTrigger>
           <SelectContent>
@@ -92,4 +92,3 @@ const ReconciliationFilters = ({
 };
 
 export default ReconciliationFilters;
-
