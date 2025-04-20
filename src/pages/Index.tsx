@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import ReconciliationTable from "@/components/ReconciliationTable";
 import { useReconciliationData } from "@/hooks/useReconciliationData";
-import { ChartBar } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 
 const Index = () => {
   const { filteredData } = useReconciliationData("", "", "All", { key: "", direction: null });
@@ -17,7 +17,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-red-100 rounded-lg">
-                <ChartBar className="h-6 w-6 text-red-600" />
+                <CircleAlert className="h-6 w-6 text-red-600" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold">Unmatched Items</h3>
