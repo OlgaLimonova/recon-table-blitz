@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,6 +7,12 @@ import { ArrowUpDown } from "lucide-react";
 import ReconciliationFilters from "./reconciliation/ReconciliationFilters";
 import { useReconciliationData } from "@/hooks/useReconciliationData";
 import { exportToCSV } from "@/utils/exportUtils";
+
+const formatNumber = (num: number) => {
+  return num.toFixed(2)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    .replace(".", ",");
+};
 
 const ReconciliationTable: React.FC = () => {
   const [auctionHouseFilter, setAuctionHouseFilter] = useState("");
@@ -150,10 +155,10 @@ const ReconciliationTable: React.FC = () => {
                   {record.account}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  {record.total.toFixed(2).replace('.', ',')}
+                  {formatNumber(record.total)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  {record.payments.toFixed(2).replace('.', ',')}
+                  {formatNumber(record.payments)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Badge className={
