@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -59,7 +58,7 @@ const ReconciliationTable: React.FC = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Account Reconciliation</h1>
+      <h1 className="text-2xl font-light mb-6">Account Reconciliation</h1>
       
       <ReconciliationFilters
         auctionHouseFilter={auctionHouseFilter}
