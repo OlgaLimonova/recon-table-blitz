@@ -41,8 +41,8 @@ const ReconciliationTable: React.FC = () => {
     { id: 15, auctionHouse: "House F", account: "10001", total: 13700.40, payments: 13700.40, status: "Matched" },
   ];
 
-  const auctionHouses = ["House A", "House B", "House C", "House D", "House E", "House F"];
-  const accountNumbers = ["10001", "10002", "10003", "10004", "10005"];
+  const auctionHouses = ["Show all", "House A", "House B", "House C", "House D", "House E", "House F"];
+  const accountNumbers = ["Show all", "10001", "10002", "10003", "10004", "10005"];
   const statusOptions = ["All", "Matched", "Unmatched"];
 
   const [data, setData] = useState<ReconciliationRecord[]>(sampleData);
@@ -61,13 +61,13 @@ const ReconciliationTable: React.FC = () => {
   useEffect(() => {
     let filtered = [...data];
 
-    if (auctionHouseFilter) {
+    if (auctionHouseFilter && auctionHouseFilter !== "Show all") {
       filtered = filtered.filter(record => 
         record.auctionHouse.toLowerCase().includes(auctionHouseFilter.toLowerCase())
       );
     }
 
-    if (accountFilter) {
+    if (accountFilter && accountFilter !== "Show all") {
       filtered = filtered.filter(record => 
         record.account.includes(accountFilter)
       );
@@ -93,7 +93,6 @@ const ReconciliationTable: React.FC = () => {
     }
 
     setFilteredData(filtered);
-    
     setSelectedRows([]);
     setSelectAll(false);
   }, [data, auctionHouseFilter, accountFilter, statusFilter, sortConfig]);
@@ -179,12 +178,15 @@ const ReconciliationTable: React.FC = () => {
           </label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full justify-between">
+              <Button variant="outline" className="w-full justify-between h-10">
                 {auctionHouseFilter || "Select auction house"}
                 <ChevronDown className="h-4 w-4 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-full min-w-[200px]">
+            <DropdownMenuContent className="w-[var(--trigger-width)] min-w-[200px]">
+              <DropdownMenuItem onClick={() => setAuctionHouseFilter("")}>
+                Show all
+              </DropdownMenuItem>
               {auctionHouses.map((house) => (
                 <DropdownMenuItem
                   key={house}
@@ -203,12 +205,15 @@ const ReconciliationTable: React.FC = () => {
           </label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full justify-between">
+              <Button variant="outline" className="w-full justify-between h-10">
                 {accountFilter || "Select account"}
                 <ChevronDown className="h-4 w-4 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-full min-w-[200px]">
+            <DropdownMenuContent className="w-[var(--trigger-width)] min-w-[200px]">
+              <DropdownMenuItem onClick={() => setAccountFilter("")}>
+                Show all
+              </DropdownMenuItem>
               {accountNumbers.map((account) => (
                 <DropdownMenuItem
                   key={account}
@@ -229,7 +234,7 @@ const ReconciliationTable: React.FC = () => {
             value={statusFilter}
             onValueChange={setStatusFilter}
           >
-            <SelectTrigger id="statusFilter" className="w-full">
+            <SelectTrigger id="statusFilter" className="w-full h-10">
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
             <SelectContent>
@@ -328,10 +333,10 @@ const ReconciliationTable: React.FC = () => {
                   {record.account}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  {record.total.toFixed(2).replace('.', ':')}
+                  {record.total.toFixed(2).replace('.', ',')}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right">
-                  {record.payments.toFixed(2).replace('.', ':')}
+                  {record.payments.toFixed(2).replace('.', ',')}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Badge className={
