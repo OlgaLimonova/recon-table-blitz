@@ -14,7 +14,9 @@ const badgeVariants = cva(
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
-          "border-transparent bg-red-100 text-red-800 hover:bg-red-100/80", // Updated to match the card's red
+          "border-transparent bg-red-100 text-red-800 hover:bg-red-100/80", // Keep unmatched items in red
+        matched:
+          "border-transparent bg-green-100 text-green-800 hover:bg-green-100/80", // New variant for matched items
         outline: "text-foreground",
       },
     },
@@ -35,3 +37,4 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants }
+

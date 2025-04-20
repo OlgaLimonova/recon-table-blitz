@@ -173,7 +173,9 @@ const ReconciliationTable: React.FC = () => {
                   {formatNumber(record.payments)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Badge variant="destructive">
+                  <Badge 
+                    variant={record.status === "Matched" ? "matched" : "destructive"}
+                  >
                     {record.status}
                   </Badge>
                 </td>
