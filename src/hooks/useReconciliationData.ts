@@ -1,24 +1,32 @@
-
 import { useState, useEffect } from "react";
 import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
-const sampleData: ReconciliationRecord[] = [
-  { id: 1, auctionHouse: auctionHouses[0], account: "10001", total: 123456789.00, payments: 123456789.00, status: "Matched" },
-  { id: 2, auctionHouse: auctionHouses[1], account: "10001", total: 32345678.00, payments: 32345478.00, status: "Unmatched" },
-  { id: 3, auctionHouse: auctionHouses[2], account: "10002", total: 4567890.00, payments: 4567890.00, status: "Matched" },
-  { id: 4, auctionHouse: auctionHouses[3], account: "10003", total: 987654.00, payments: 987454.00, status: "Unmatched" },
-  { id: 5, auctionHouse: auctionHouses[4], account: "10002", total: 2345678.00, payments: 2345678.00, status: "Matched" },
-  { id: 6, auctionHouse: auctionHouses[5], account: "10004", total: 76543210.00, payments: 76543010.00, status: "Unmatched" },
-  { id: 7, auctionHouse: auctionHouses[6], account: "10003", total: 8765432.00, payments: 8765432.00, status: "Matched" },
-  { id: 8, auctionHouse: auctionHouses[7], account: "10005", total: 45678901.00, payments: 45678901.00, status: "Matched" },
-  { id: 9, auctionHouse: auctionHouses[8], account: "10004", total: 23456789.00, payments: 23456589.00, status: "Unmatched" },
-  { id: 10, auctionHouse: auctionHouses[9], account: "10005", total: 5432109.00, payments: 5432109.00, status: "Matched" },
-  { id: 11, auctionHouse: auctionHouses[10], account: "10001", total: 98765432.00, payments: 98765232.00, status: "Unmatched" },
-  { id: 12, auctionHouse: auctionHouses[11], account: "10003", total: 3456789.00, payments: 3456789.00, status: "Matched" },
-  { id: 13, auctionHouse: auctionHouses[12], account: "10002", total: 65432109.00, payments: 65432109.00, status: "Matched" },
-  { id: 14, auctionHouse: auctionHouses[13], account: "10004", total: 87654321.00, payments: 87654121.00, status: "Unmatched" },
-  { id: 15, auctionHouse: auctionHouses[14], account: "10001", total: 12345678.00, payments: 12345678.00, status: "Matched" },
-];
+// Generate 375 records (75 auction houses × 5 accounts)
+const generateSampleData = (): ReconciliationRecord[] => {
+  const records: ReconciliationRecord[] = [];
+  let id = 1;
+
+  for (const auctionHouse of auctionHouses) {
+    for (const account of accountNumbers) {
+      const total = Math.round(Math.random() * 10000000000) / 100; // Random amount between 0 and 100M
+      const isMatched = Math.random() > 0.3; // 70% chance of being matched
+      const payments = isMatched ? total : total - (Math.random() * 1000);
+      
+      records.push({
+        id: id++,
+        auctionHouse,
+        account,
+        total,
+        payments,
+        status: isMatched ? "Matched" : "Unmatched"
+      });
+    }
+  }
+
+  return records;
+};
+
+const sampleData: ReconciliationRecord[] = generateSampleData();
 
 export const useReconciliationData = (
   auctionHouseFilter: string,
@@ -83,7 +91,6 @@ export const useReconciliationData = (
   };
 
   const toggleSelectAll = () => {
-    // Modified to simply clear selected rows without toggling
     setSelectedRows([]);
     setSelectAll(false);
   };
