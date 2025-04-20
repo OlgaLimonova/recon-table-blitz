@@ -82,7 +82,7 @@ const ReconciliationTable: React.FC = () => {
           <Button 
             variant="outline"
             onClick={toggleSelectAll}
-            disabled={filteredData.length === 0}
+            disabled={selectedRows.length === 0}
             className="flex items-center gap-2"
           >
             <X className="h-4 w-4" />
