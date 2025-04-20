@@ -83,12 +83,14 @@ export const useReconciliationData = (
   };
 
   const toggleSelectAll = () => {
-    if (selectAll) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows(filteredData.map(record => record.id));
-    }
-    setSelectAll(!selectAll);
+    // Modified to simply clear selected rows without toggling
+    setSelectedRows([]);
+    setSelectAll(false);
+  };
+
+  const selectAllRows = () => {
+    setSelectedRows(filteredData.map(record => record.id));
+    setSelectAll(true);
   };
 
   return {
@@ -97,5 +99,6 @@ export const useReconciliationData = (
     selectAll,
     toggleRowSelection,
     toggleSelectAll,
+    selectAllRows,
   };
 };

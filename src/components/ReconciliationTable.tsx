@@ -30,6 +30,7 @@ const ReconciliationTable: React.FC = () => {
     selectAll,
     toggleRowSelection,
     toggleSelectAll,
+    selectAllRows,
   } = useReconciliationData(auctionHouseFilter, accountFilter, statusFilter, sortConfig);
 
   const requestSort = (key: string) => {
@@ -147,7 +148,7 @@ const ReconciliationTable: React.FC = () => {
                 <div className="flex items-center justify-end">
                   <Checkbox 
                     checked={selectAll}
-                    onCheckedChange={toggleSelectAll}
+                    onCheckedChange={selectAllRows}
                     aria-label="Select all rows"
                   />
                 </div>
