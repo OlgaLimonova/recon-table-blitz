@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ReconciliationRecord } from "@/types/reconciliation";
 
@@ -99,4 +98,3 @@ export const useReconciliationData = (
     toggleSelectAll,
   };
 };
-

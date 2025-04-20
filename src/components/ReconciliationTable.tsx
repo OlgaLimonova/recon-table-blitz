@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -186,4 +185,3 @@ const ReconciliationTable: React.FC = () => {
 };
 
 export default ReconciliationTable;
-
