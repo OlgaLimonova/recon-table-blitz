@@ -1,22 +1,23 @@
+
 import { useState, useEffect } from "react";
-import { ReconciliationRecord } from "@/types/reconciliation";
+import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
 const sampleData: ReconciliationRecord[] = [
-  { id: 1, auctionHouse: "House A", account: "10001", total: 15000.00, payments: 15000.00, status: "Matched" },
-  { id: 2, auctionHouse: "House B", account: "10001", total: 7500.50, payments: 7350.50, status: "Unmatched" },
-  { id: 3, auctionHouse: "House C", account: "10002", total: 12400.75, payments: 12400.75, status: "Matched" },
-  { id: 4, auctionHouse: "House A", account: "10003", total: 9200.25, payments: 9050.00, status: "Unmatched" },
-  { id: 5, auctionHouse: "House D", account: "10002", total: 6300.00, payments: 6300.00, status: "Matched" },
-  { id: 6, auctionHouse: "House E", account: "10004", total: 22150.80, payments: 22000.00, status: "Unmatched" },
-  { id: 7, auctionHouse: "House F", account: "10003", total: 8750.45, payments: 8750.45, status: "Matched" },
-  { id: 8, auctionHouse: "House B", account: "10005", total: 14300.20, payments: 14300.20, status: "Matched" },
-  { id: 9, auctionHouse: "House C", account: "10004", total: 18600.35, payments: 18200.35, status: "Unmatched" },
-  { id: 10, auctionHouse: "House F", account: "10005", total: 5400.90, payments: 5400.90, status: "Matched" },
-  { id: 11, auctionHouse: "House A", account: "10001", total: 11250.60, payments: 11000.60, status: "Unmatched" },
-  { id: 12, auctionHouse: "House D", account: "10003", total: 7900.30, payments: 7900.30, status: "Matched" },
-  { id: 13, auctionHouse: "House E", account: "10002", total: 16800.15, payments: 16800.15, status: "Matched" },
-  { id: 14, auctionHouse: "House B", account: "10004", total: 9450.75, payments: 9200.75, status: "Unmatched" },
-  { id: 15, auctionHouse: "House F", account: "10001", total: 13700.40, payments: 13700.40, status: "Matched" },
+  { id: 1, auctionHouse: auctionHouses[0], account: "10001", total: 15000.00, payments: 15000.00, status: "Matched" },
+  { id: 2, auctionHouse: auctionHouses[1], account: "10001", total: 7500.50, payments: 7350.50, status: "Unmatched" },
+  { id: 3, auctionHouse: auctionHouses[2], account: "10002", total: 12400.75, payments: 12400.75, status: "Matched" },
+  { id: 4, auctionHouse: auctionHouses[3], account: "10003", total: 9200.25, payments: 9050.00, status: "Unmatched" },
+  { id: 5, auctionHouse: auctionHouses[4], account: "10002", total: 6300.00, payments: 6300.00, status: "Matched" },
+  { id: 6, auctionHouse: auctionHouses[5], account: "10004", total: 22150.80, payments: 22000.00, status: "Unmatched" },
+  { id: 7, auctionHouse: auctionHouses[6], account: "10003", total: 8750.45, payments: 8750.45, status: "Matched" },
+  { id: 8, auctionHouse: auctionHouses[7], account: "10005", total: 14300.20, payments: 14300.20, status: "Matched" },
+  { id: 9, auctionHouse: auctionHouses[8], account: "10004", total: 18600.35, payments: 18200.35, status: "Unmatched" },
+  { id: 10, auctionHouse: auctionHouses[9], account: "10005", total: 5400.90, payments: 5400.90, status: "Matched" },
+  { id: 11, auctionHouse: auctionHouses[10], account: "10001", total: 11250.60, payments: 11000.60, status: "Unmatched" },
+  { id: 12, auctionHouse: auctionHouses[11], account: "10003", total: 7900.30, payments: 7900.30, status: "Matched" },
+  { id: 13, auctionHouse: auctionHouses[12], account: "10002", total: 16800.15, payments: 16800.15, status: "Matched" },
+  { id: 14, auctionHouse: auctionHouses[13], account: "10004", total: 9450.75, payments: 9200.75, status: "Unmatched" },
+  { id: 15, auctionHouse: auctionHouses[14], account: "10001", total: 13700.40, payments: 13700.40, status: "Matched" },
 ];
 
 export const useReconciliationData = (
