@@ -1,9 +1,10 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, X } from "lucide-react";
 import ReconciliationFilters from "./reconciliation/ReconciliationFilters";
 import { useReconciliationData } from "@/hooks/useReconciliationData";
 import { exportToCSV } from "@/utils/exportUtils";
@@ -76,13 +77,24 @@ const ReconciliationTable: React.FC = () => {
             </span>
           )}
         </div>
-        <Button 
-          onClick={() => exportToCSV(selectedRows, filteredData)} 
-          disabled={selectedRows.length === 0}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
-          Export to Excel
-        </Button>
+        <div className="flex items-center space-x-2">
+          <Button 
+            variant="outline"
+            onClick={toggleSelectAll}
+            disabled={filteredData.length === 0}
+            className="flex items-center gap-2"
+          >
+            <X className="h-4 w-4" />
+            Clear all
+          </Button>
+          <Button 
+            onClick={() => exportToCSV(selectedRows, filteredData)} 
+            disabled={selectedRows.length === 0}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            Export to Excel
+          </Button>
+        </div>
       </div>
       
       <div className="border rounded-md overflow-auto max-h-[600px]">
