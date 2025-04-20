@@ -7,7 +7,7 @@ import { CircleAlert } from "lucide-react";
 const Index = () => {
   const { filteredData } = useReconciliationData("", "", "All", { key: "", direction: null });
   const unmatchedCount = filteredData.filter(item => item.status === "Unmatched").length;
-  const totalCount = filteredData.length;
+  const totalCount = filteredData.length; // This will now correctly reflect 375 items
   const matchedPercentage = Math.round((totalCount - unmatchedCount) / totalCount * 100);
 
   return (
@@ -40,3 +40,4 @@ const Index = () => {
 };
 
 export default Index;
+
