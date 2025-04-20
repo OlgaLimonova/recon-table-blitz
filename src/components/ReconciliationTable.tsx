@@ -1,8 +1,10 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { ArrowUpDown } from "lucide-react";
 import ReconciliationFilters from "./reconciliation/ReconciliationFilters";
 import { useReconciliationData } from "@/hooks/useReconciliationData";
 import { exportToCSV } from "@/utils/exportUtils";
@@ -87,7 +89,8 @@ const ReconciliationTable: React.FC = () => {
                 onClick={() => requestSort('auctionHouse')}
               >
                 <div className="flex items-center">
-                  Auction House {getSortIndicator('auctionHouse')}
+                  Auction House 
+                  <ArrowUpDown className="ml-2 h-4 w-4 text-gray-400" />
                 </div>
               </th>
               <th 
@@ -95,7 +98,8 @@ const ReconciliationTable: React.FC = () => {
                 onClick={() => requestSort('account')}
               >
                 <div className="flex items-center">
-                  Account {getSortIndicator('account')}
+                  Account 
+                  <ArrowUpDown className="ml-2 h-4 w-4 text-gray-400" />
                 </div>
               </th>
               <th 
