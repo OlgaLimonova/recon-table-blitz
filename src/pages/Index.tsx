@@ -12,27 +12,29 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <Card className="mb-8">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-red-100 rounded-lg">
-                <CircleAlert className="h-6 w-6 text-red-600" />
+      <div className="w-full max-w-7xl mx-auto">
+        <Card className="mb-8">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-red-100 rounded-lg">
+                  <CircleAlert className="h-6 w-6 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold">Unmatched Items</h3>
+                  <p className="text-sm text-gray-500">Items requiring attention</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">Unmatched Items</h3>
-                <p className="text-sm text-gray-500">Items requiring attention</p>
+              <div className="text-right">
+                <span className="text-3xl font-bold text-red-600">{unmatchedCount}</span>
+                <p className="text-sm text-gray-500">out of {totalCount} total items</p>
+                <p className="text-sm text-green-600">{matchedPercentage}% matched</p>
               </div>
             </div>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-red-600">{unmatchedCount}</span>
-              <p className="text-sm text-gray-500">out of {totalCount} total items</p>
-              <p className="text-sm text-green-600">{matchedPercentage}% matched</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      <ReconciliationTable />
+          </CardContent>
+        </Card>
+        <ReconciliationTable />
+      </div>
     </div>
   );
 };
