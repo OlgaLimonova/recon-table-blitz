@@ -91,7 +91,7 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
-				sans: ['Roboto', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Helvetica Neue', 'Arial', 'sans-serif'],
+				sans: ['Archivo', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Helvetica Neue', 'Arial', 'sans-serif'],
 			}
 		}
 	},
