@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
@@ -12,18 +13,36 @@ const generateSampleData = (): ReconciliationRecord[] => {
       let payments: number;
       const isMatched = Math.random() > 0.3; // 70% chance of being matched
 
-      // All accounts: 4 digits, .00
-      total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000); // 1000-9999
-      total = Number(total.toFixed(0));
-      payments = isMatched
-        ? total
-        : Math.max(
-            0,
-            total - Math.floor(Math.random() * Math.min(total, 1000))
-          );
-      payments = Number(payments.toFixed(0));
+      if (account === "1001") {
+        // 4 digits, .00
+        total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 1000))
+            );
+      } else if (account === "1002") {
+        // 5 digits, .00
+        total = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 5000))
+            );
+      } else {
+        // 4 digits for other accounts
+        total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 1000))
+            );
+      }
 
-      // Ensure .00 after comma
+      // Ensure 2 decimal places (.00)
       total = Number(total.toFixed(2));
       payments = Number(payments.toFixed(2));
 
@@ -124,3 +143,4 @@ export const useReconciliationData = (
     selectAllRows,
   };
 };
+
