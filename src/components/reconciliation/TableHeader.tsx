@@ -89,4 +89,3 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 };
 
 export default TableHeader;
-
