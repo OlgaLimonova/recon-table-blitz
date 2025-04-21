@@ -18,14 +18,15 @@ const TableActions: React.FC<TableActionsProps> = ({
 }) => {
   return (
     <div className="flex justify-between items-center mb-4">
-      <div>
+      {/* Removed separate div for selected rows count */}
+
+      <div className="flex items-center space-x-2">
+        {/* Row count text moved here with same gap */}
         {selectedRows.length > 0 && (
           <span className="text-sm font-medium">
             {selectedRows.length} {selectedRows.length === 1 ? 'row' : 'rows'} selected
           </span>
         )}
-      </div>
-      <div className="flex items-center space-x-2">
         <Button 
           variant="outline"
           onClick={onClearSelection}
