@@ -14,8 +14,9 @@ const Checkbox = React.forwardRef<
   const checkboxRef = React.useRef<HTMLButtonElement>(null);
   
   React.useEffect(() => {
-    if (checkboxRef.current) {
-      checkboxRef.current.indeterminate = !!indeterminate;
+    if (checkboxRef.current && indeterminate !== undefined) {
+      // Use a type assertion to tell TypeScript that we know what we're doing
+      (checkboxRef.current as any).indeterminate = indeterminate;
     }
   }, [indeterminate]);
 
