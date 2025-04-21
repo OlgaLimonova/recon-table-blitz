@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
@@ -14,7 +13,7 @@ const generateSampleData = (): ReconciliationRecord[] => {
       const isMatched = Math.random() > 0.3; // 70% chance of being matched
 
       if (account === "1001") {
-        // 4 digits, .00
+        // 4 digits
         total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
         payments = isMatched
           ? total
@@ -23,7 +22,7 @@ const generateSampleData = (): ReconciliationRecord[] => {
               total - Math.floor(Math.random() * Math.min(total, 1000))
             );
       } else if (account === "1002") {
-        // 5 digits, .00
+        // 5 digits
         total = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
         payments = isMatched
           ? total
@@ -31,8 +30,26 @@ const generateSampleData = (): ReconciliationRecord[] => {
               0,
               total - Math.floor(Math.random() * Math.min(total, 5000))
             );
+      } else if (account === "1003") {
+        // 6 digits
+        total = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 50000))
+            );
+      } else if (account === "1004") {
+        // 8 digits
+        total = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000);
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 1000000))
+            );
       } else {
-        // 4 digits for other accounts
+        // 4 digits for 1005 and others
         total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
         payments = isMatched
           ? total
@@ -143,4 +160,3 @@ export const useReconciliationData = (
     selectAllRows,
   };
 };
-
