@@ -1,3 +1,4 @@
+
 export interface ReconciliationRecord {
   id: number;
   auctionHouse: string;
@@ -88,5 +89,7 @@ export const auctionHouses = [
   "Kunst- und Auktionshaus Kleinhenz"
 ];
 
-export const accountNumbers = ["10001", "10002", "10003", "10004", "10005"];
+// Change to only 4-digit account numbers
+export const accountNumbers = ["1001", "1002", "1003", "1004", "1005"];
 export const statusOptions = ["All", "Matched", "Unmatched"];
+

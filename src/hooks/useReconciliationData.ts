@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
-// Generate 375 records (75 auction houses × 5 accounts)
+// Generate records (auction houses × 4-digit accounts)
 const generateSampleData = (): ReconciliationRecord[] => {
   const records: ReconciliationRecord[] = [];
   let id = 1;
@@ -13,40 +12,16 @@ const generateSampleData = (): ReconciliationRecord[] => {
       let payments: number;
       const isMatched = Math.random() > 0.3; // 70% chance of being matched
 
-      if (account === "10001") {
-        // 4 digits, .00
-        total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
-        total = Number(total.toFixed(0));
-        payments = isMatched
-          ? total
-          : Math.max(
-              0,
-              total - Math.floor(Math.random() * Math.min(total, 1000))
-            );
-        payments = Number(payments.toFixed(0));
-      } else if (account === "10002") {
-        // 5 digits, .00
-        total = Math.floor(Math.random() * (99999 - 10000 + 1) + 10000);
-        total = Number(total.toFixed(0));
-        payments = isMatched
-          ? total
-          : Math.max(
-              0,
-              total - Math.floor(Math.random() * Math.min(total, 5000))
-            );
-        payments = Number(payments.toFixed(0));
-      } else {
-        // 6-9 digits, .00
-        total = Math.floor(Math.random() * (999_999_999 - 100_000 + 1) + 100_000);
-        total = Number(total.toFixed(0));
-        payments = isMatched
-          ? total
-          : Math.max(
-              0,
-              total - Math.floor(Math.random() * Math.min(total, 100_000))
-            );
-        payments = Number(payments.toFixed(0));
-      }
+      // All accounts: 4 digits, .00
+      total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000); // 1000-9999
+      total = Number(total.toFixed(0));
+      payments = isMatched
+        ? total
+        : Math.max(
+            0,
+            total - Math.floor(Math.random() * Math.min(total, 1000))
+          );
+      payments = Number(payments.toFixed(0));
 
       // Ensure .00 after comma
       total = Number(total.toFixed(2));

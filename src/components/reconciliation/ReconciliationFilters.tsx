@@ -21,7 +21,7 @@ const ReconciliationFilters = ({
   statusFilter,
   setStatusFilter,
 }: ReconciliationFiltersProps) => {
-  // Modify auctionHouses and accountNumbers to remove "Show all"
+  // Filters show "Show all" + all account numbers (now only 4-digit)
   const filteredAuctionHouses = ["Show all", ...auctionHouses.filter(house => house !== "Show all")];
   const filteredAccountNumbers = ["Show all", ...accountNumbers.filter(account => account !== "Show all")];
 
