@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ReconciliationRecord, auctionHouses, accountNumbers } from "@/types/reconciliation";
 
@@ -8,20 +9,38 @@ const generateSampleData = (): ReconciliationRecord[] => {
 
   for (const auctionHouse of auctionHouses) {
     for (const account of accountNumbers) {
-      // Generate a total between 1,000 and 999,999,999 inclusive (with up to 2 decimal places)
-      const total = Math.round(
-        (Math.random() * (999_999_999 - 1_000) + 1_000) * 100
-      ) / 100;
+      let total: number;
+      let payments: number;
       const isMatched = Math.random() > 0.3; // 70% chance of being matched
-      // Payments for unmatched: slightly less than total, but at least 0
-      const payments = isMatched
-        ? total
-        : Math.max(
-            0,
-            Math.round(
-              (total - (Math.random() * Math.min(total, 10_000))) * 100
-            ) / 100
-          );
+
+      if (account === "10001") {
+        // Total for account 10001 = 4 digits, always ends in .00
+        total = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+        total = Number(total.toFixed(0));
+        // payments
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 1000))
+            );
+        payments = Number(payments.toFixed(0));
+      } else {
+        // Total for all other accounts = 5-9 digits, always ends in .00
+        total = Math.floor(Math.random() * (999_999_999 - 1_000 + 1) + 1_000);
+        total = Number(total.toFixed(0));
+        payments = isMatched
+          ? total
+          : Math.max(
+              0,
+              total - Math.floor(Math.random() * Math.min(total, 10_000))
+            );
+        payments = Number(payments.toFixed(0));
+      }
+
+      // Force numbers to have exactly .00 after comma
+      total = Number(total.toFixed(2));
+      payments = Number(payments.toFixed(2));
 
       records.push({
         id: id++,
