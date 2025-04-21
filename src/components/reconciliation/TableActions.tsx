@@ -17,11 +17,8 @@ const TableActions: React.FC<TableActionsProps> = ({
   onClearSelection 
 }) => {
   return (
-    <div className="flex justify-between items-center mb-4">
-      {/* Removed separate div for selected rows count */}
-
-      <div className="flex items-center space-x-2">
-        {/* Row count text moved here with same gap */}
+    <div className="flex justify-end items-center mb-4">
+      <div className="flex items-center space-x-4">
         {selectedRows.length > 0 && (
           <span className="text-sm font-medium">
             {selectedRows.length} {selectedRows.length === 1 ? 'row' : 'rows'} selected
@@ -49,3 +46,4 @@ const TableActions: React.FC<TableActionsProps> = ({
 };
 
 export default TableActions;
+
