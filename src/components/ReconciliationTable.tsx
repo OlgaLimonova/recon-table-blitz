@@ -31,9 +31,21 @@ const ReconciliationTable: React.FC = () => {
     selectAllRows,
   } = useReconciliationData(auctionHouseFilter, accountFilter, statusFilter, sortConfig);
 
+  // Calculate header checkbox state
+  const allVisibleSelected = filteredData.length > 0 && filteredData.every(row => selectedRows.includes(row.id));
+  const isIndeterminate = selectedRows.length > 0 && !allVisibleSelected;
+
+  const handleHeaderCheckboxChange = () => {
+    if (allVisibleSelected) {
+      toggleSelectAll();
+    } else {
+      selectAllRows();
+    }
+  };
+
   const requestSort = (key: string) => {
     let direction: 'ascending' | 'descending' | null = 'ascending';
-    
+
     if (sortConfig.key === key) {
       if (sortConfig.direction === 'ascending') {
         direction = 'descending';
@@ -41,14 +53,14 @@ const ReconciliationTable: React.FC = () => {
         direction = null;
       }
     }
-    
+
     setSortConfig({ key, direction });
   };
 
   return (
     <div className="w-full max-w-7xl mx-auto">
       <h1 className="text-2xl font-semibold mb-6">Account Reconciliation</h1>
-      
+
       <ReconciliationFilters
         auctionHouseFilter={auctionHouseFilter}
         setAuctionHouseFilter={setAuctionHouseFilter}
@@ -57,18 +69,21 @@ const ReconciliationTable: React.FC = () => {
         statusFilter={statusFilter}
         setStatusFilter={setStatusFilter}
       />
-      
+
       <TableActions 
         selectedRows={selectedRows}
         filteredData={filteredData}
         onClearSelection={toggleSelectAll}
       />
-      
+
       <div className="border rounded-md overflow-auto max-h-[600px]">
         <table className="min-w-full divide-y divide-gray-200">
-          <TableHeader 
+          <TableHeader
             requestSort={requestSort}
             sortConfig={sortConfig}
+            allSelected={allVisibleSelected}
+            onToggleSelectAll={handleHeaderCheckboxChange}
+            indeterminate={isIndeterminate}
           />
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredData.length > 0 ? filteredData.map((record) => (
@@ -94,3 +109,4 @@ const ReconciliationTable: React.FC = () => {
 };
 
 export default ReconciliationTable;
+
