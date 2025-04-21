@@ -8,10 +8,21 @@ const generateSampleData = (): ReconciliationRecord[] => {
 
   for (const auctionHouse of auctionHouses) {
     for (const account of accountNumbers) {
-      const total = Math.round(Math.random() * 10000000000) / 100; // Random amount between 0 and 100M
+      // Generate a total between 1,000 and 999,999,999 inclusive (with up to 2 decimal places)
+      const total = Math.round(
+        (Math.random() * (999_999_999 - 1_000) + 1_000) * 100
+      ) / 100;
       const isMatched = Math.random() > 0.3; // 70% chance of being matched
-      const payments = isMatched ? total : total - (Math.random() * 1000);
-      
+      // Payments for unmatched: slightly less than total, but at least 0
+      const payments = isMatched
+        ? total
+        : Math.max(
+            0,
+            Math.round(
+              (total - (Math.random() * Math.min(total, 10_000))) * 100
+            ) / 100
+          );
+
       records.push({
         id: id++,
         auctionHouse,
